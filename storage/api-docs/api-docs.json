@@ -1,0 +1,573 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My documentation notebook API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/v1/": {},
+        "/api/v1/notebook": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "List of notebooks.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "288"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "test notebook"
+                                                    },
+                                                    "company": {
+                                                        "type": "string",
+                                                        "example": "Vimm Bill Dane"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string",
+                                                        "example": "8-999-64-64"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "admin@mail.ru"
+                                                    },
+                                                    "birthday": {
+                                                        "type": "string",
+                                                        "example": "1990-10-06"
+                                                    },
+                                                    "photo": {
+                                                        "type": "string",
+                                                        "example": "www.vk.ru/photo/3.com"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error. Not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebooks not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Create a notebook.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "test notebook"
+                                            },
+                                            "company": {
+                                                "type": "string",
+                                                "example": "Vimm Bill Dane"
+                                            },
+                                            "phone": {
+                                                "type": "string",
+                                                "example": "8-999-64-64"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "admin@mail.ru"
+                                            },
+                                            "birthday": {
+                                                "type": "string",
+                                                "example": "1990-10-06"
+                                            },
+                                            "photo": {
+                                                "type": "string",
+                                                "example": "www.vk.ru/photo/3.com"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "288"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "test notebook"
+                                                },
+                                                "company": {
+                                                    "type": "string",
+                                                    "example": "Vimm Bill Dane"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "8-999-64-64"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "admin@mail.ru"
+                                                },
+                                                "birthday": {
+                                                    "type": "string",
+                                                    "example": "1990-10-06"
+                                                },
+                                                "photo": {
+                                                    "type": "string",
+                                                    "example": "www.vk.ru/photo/3.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid data value",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "288"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "test notebook"
+                                                },
+                                                "company": {
+                                                    "type": "string",
+                                                    "example": "Vimm Bill Dane"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "8-999-64-64"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "admin@mail.ru"
+                                                },
+                                                "birthday": {
+                                                    "type": "string",
+                                                    "example": "1990-10-06"
+                                                },
+                                                "photo": {
+                                                    "type": "string",
+                                                    "example": "www.vk.ru/photo/3.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/notebook/{id}": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Returns a notebook.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of notebook",
+                        "required": true,
+                        "example": 11
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "288"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "test notebook"
+                                                },
+                                                "company": {
+                                                    "type": "string",
+                                                    "example": "Vimm Bill Dane"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "8-999-64-64"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "admin@mail.ru"
+                                                },
+                                                "birthday": {
+                                                    "type": "string",
+                                                    "example": "1990-10-06"
+                                                },
+                                                "photo": {
+                                                    "type": "string",
+                                                    "example": "www.vk.ru/photo/3.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error. Not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Update a notebook.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of notebook",
+                        "required": true,
+                        "example": 10
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "test notebook"
+                                            },
+                                            "company": {
+                                                "type": "string",
+                                                "example": "Vimm Bill Dane"
+                                            },
+                                            "phone": {
+                                                "type": "string",
+                                                "example": "8-999-64-64"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "admin@mail.ru"
+                                            },
+                                            "birthday": {
+                                                "type": "string",
+                                                "example": "1990-10-06"
+                                            },
+                                            "photo": {
+                                                "type": "string",
+                                                "example": "www.vk.ru/photo/3.com"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "288"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "test notebook"
+                                                },
+                                                "company": {
+                                                    "type": "string",
+                                                    "example": "Vimm Bill Dane"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "8-999-64-64"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "admin@mail.ru"
+                                                },
+                                                "birthday": {
+                                                    "type": "string",
+                                                    "example": "1990-10-06"
+                                                },
+                                                "photo": {
+                                                    "type": "string",
+                                                    "example": "www.vk.ru/photo/3.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid status value",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "288"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "test notebook"
+                                                },
+                                                "company": {
+                                                    "type": "string",
+                                                    "example": "Vimm Bill Dane"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "8-999-64-64"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "admin@mail.ru"
+                                                },
+                                                "birthday": {
+                                                    "type": "string",
+                                                    "example": "1990-10-06"
+                                                },
+                                                "photo": {
+                                                    "type": "string",
+                                                    "example": "www.vk.ru/photo/3.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Delete a notebook.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of notebook",
+                        "required": true,
+                        "example": 11
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "288"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "test notebook"
+                                                },
+                                                "company": {
+                                                    "type": "string",
+                                                    "example": "Vimm Bill Dane"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "8-999-64-64"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "admin@mail.ru"
+                                                },
+                                                "birthday": {
+                                                    "type": "string",
+                                                    "example": "1990-10-06"
+                                                },
+                                                "photo": {
+                                                    "type": "string",
+                                                    "example": "www.vk.ru/photo/3.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Notebook deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

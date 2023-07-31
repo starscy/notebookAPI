@@ -1,0 +1,261 @@
+openapi: 3.0.0
+info:
+  title: My API
+  description: Test API for notebooks
+  version: 1.0.0-oas3
+servers:
+  - url: https://localhost:7000/api/v1/
+    description: Dev server
+paths:
+  /notebook:
+    get:
+      summary: Returns a list of notebooks.
+      tags:
+        - Notebook
+      operationId: getAllNotebooks
+      description: Возвращает список записных книжек.
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseArray"
+        'default':
+          description: Все нестандартные ответы
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create a notebook.
+      tags:
+        - Notebook
+      operationId: createNotebook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Notebook"
+      description: Создание записной книжки.
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseArrayForOne"
+        '422':
+          description: Ошибка при заполнении данных
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseError422"
+        'default':
+          description: Все нестандартные ответы
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
+
+  /notebook/{id}:
+    get:
+      summary: Returns a notebook.
+      tags:
+        - Notebook
+      operationId: getNotebookById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор записной книжки
+          schema:
+            type: integer
+          example: 1
+      description: Возвращает выбранную записную книжку по идентификатору.
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseArrayForOne"
+        'default':
+          description: Все нестандартные ответы
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Returns a notebook with  changes.
+      tags:
+        - Notebook
+      operationId: updateNotebookById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор записной книжки
+          schema:
+            type: integer
+          example: 1
+      description: Сохраняет изменения в записной книжке.
+      responses:
+        '200':
+          description: Изменения сохранены
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseArrayForOne"
+        '422':
+          description: Ошибка при заполнении данных
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseError422"
+        'default':
+          description: Все нестандартные ответы
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a notebook.
+      tags:
+        - Notebook
+      operationId: deleteNotebook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор записной книжки
+          schema:
+            type: integer
+          example: 1
+      description: Удаление выбранной записной книжки по идентификатору.
+      responses:
+        '200':
+          description: Успешное удаление
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseArrayForOne"
+        'default':
+          description: Все нестандартные ответы
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Notebook:
+      type: object
+      required:
+        - title
+        - phone
+        - email
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: 'Записная книжка юзера 1'
+        company:
+          type: string
+          example: 'ВимБильДАн'
+        phone:
+          type: string
+          example: '8-999-000-00-01'
+        email:
+          type: string
+          example: 'user1@mail.com'
+        birthday:
+          type: string
+          example: '10-06-1990'
+        photo:
+          type: string
+          example: 'http://avatar/image/1'
+    Notebooks:
+      type: array
+      items:
+        $ref: "#/components/schemas/Notebook"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        success:
+          type: boolean
+        code:
+          type: integer
+        message:
+          type: string
+      example:
+        {
+          success: false,
+          code: 400,
+          message: Page not found
+        }
+    ResponseError422:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        succes:
+          type: boolean
+        code:
+          type: integer
+        message:
+          type: string
+        errors:
+          type: object
+      example:
+        success: false
+        code: 422
+        message: "Something wrong"
+        errors:
+          phone:
+            - Такое значение поля phone уже существует.
+          email:
+            - Такое значение поля email уже существует.
+    ResponseArray:
+      type: object
+      required:
+        - data
+      properties:
+        success:
+          type: boolean
+        data:
+          $ref: "#/components/schemas/Notebooks"
+        message:
+          type: string
+    ResponseArrayForOne:
+      type: object
+      required:
+        - data
+      properties:
+        success:
+          type: boolean
+        data:
+          $ref: "#/components/schemas/Notebook"
+        message:
+          type: string
+      example:
+        success: true
+        data:
+          id: 1
+          title: Записная книжка юзера 1
+          company: ВимБильДАн
+          phone: 8-999-000-00-01
+          email: user1@mail.com
+          birthday: 10-06-1990 00:00:00
+          photo: http://avatar/image/1
+        message: Succesfull operation
+
+
