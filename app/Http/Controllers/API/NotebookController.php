@@ -25,8 +25,8 @@ class NotebookController extends BaseController
             'page' => '',
             'countPages' => ''
         ]);
-        $page = $data['page'] ?? 2;
-        $countPages = $data['countPages'] ?? 2;
+        $page = $data['page'] ?? config('global.ONE');
+        $countPages = $data['countPages'] ?? config('global.TWENTY');;
 
         $notebooks = Notebook::paginate($countPages, ['*'], 'page', $page);
 

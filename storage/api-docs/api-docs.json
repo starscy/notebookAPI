@@ -12,6 +12,22 @@
                     "Notebook"
                 ],
                 "summary": "List of notebooks.",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "current page",
+                        "required": false,
+                        "example": 1
+                    },
+                    {
+                        "name": "countPages",
+                        "in": "query",
+                        "description": "count of pages",
+                        "required": false,
+                        "example": 10
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",

@@ -70,7 +70,20 @@ use Illuminate\Http\Request;
  *     path="/api/v1/notebook",
  *     summary="List of notebooks.",
  *     tags={"Notebook"},
- *
+ *     @OA\Parameter (
+ *         description="current page",
+ *         in="query",
+ *         name="page",
+ *         required=false,
+ *         example=1
+ *     ),
+ *     @OA\Parameter (
+ *         description="count of pages",
+ *         in="query",
+ *         name="countPages",
+ *         required=false,
+ *         example=10
+ *     ),
  *     @OA\Property(property="page", type="integer", example="2"),
  *     @OA\Property(property="countPages", type="integer", example="10"),
  *
